@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: Chat Saving API
+  version: 1.0.0
+paths:
+  /saveChat:
+    post:
+      summary: Saves a chat message to a file.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chatText:
+                  type: string
+                  description: Text of the chat to be saved.
+                secretCommand:
+                  type: string
+                  description: Secret command to authorize saving.
+              required:
+                - chatText
+                - secretCommand
+      responses:
+        200:
+          description: Returns confirmation message and file name.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  filename:
+                    type: string
