@@ -3,11 +3,12 @@ info:
   title: Chat Saving API
   version: 1.0.0
 servers:
-  - url: 'https://your-api-server.com'
+  - url: https://your-api-server.com
     description: Production server
 paths:
   /saveChat:
     post:
+      operationId: saveChat  # Unique identifier for this operation
       summary: Saves a chat message to a file.
       requestBody:
         required: true
