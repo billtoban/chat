@@ -3,7 +3,7 @@ info:
   title: Chat Saving API
   version: 1.0.0
 servers:
-  - url: https://github.com/billtoban/chat
+  - url:  https://chat-sever-4d15cecac4a5.herokuapp.com/
     description: Production server
 paths:
   /saveChat:
