@@ -1,22 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const fs = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-const openaiApiKey = process.env.OPENAI_API_KEY;
-console.log('OpenAI API Key:', openaiApiKey);
-
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Route for the root path
 app.get('/', (req, res) => {
     res.send('Welcome to the chat server!');
 });
 
+// Route to save chat data
 app.post('/saveChat', async (req, res) => {
     const { chatText, secretCommand } = req.body;
 
@@ -44,6 +44,14 @@ app.post('/saveChat', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).send('Internal server error.');
 });
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
